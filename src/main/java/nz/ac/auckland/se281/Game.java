@@ -53,12 +53,13 @@ public class Game {
         numberFingersInt = Integer.parseInt(numberFingers);
 
         // check if the input is within the range of 0 to 5 (inclusive)
-        if (numberFingersInt >= 0 || numberFingersInt <= 5) {
+        if (numberFingersInt >= 0 && numberFingersInt <= 5) {
           isInputValid = true;
         } else {
           // print an error message if the input is not within the range of 0 to 5 (inclusive)
           MessageCli.INVALID_INPUT.printMessage();
         }
+
         // print an error message if the input is not a number (NumberFormatException)
       } catch (NumberFormatException e) {
         MessageCli.INVALID_INPUT.printMessage();
