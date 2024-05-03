@@ -22,12 +22,13 @@ public class Game {
     String numberFingers = Utils.scanner.nextLine();
     int numberFingersInt = Integer.parseInt(numberFingers);
 
-    if (numberFingersInt < 0 || numberFingersInt > 5) {
+    while (numberFingersInt < 0 || numberFingersInt > 5) {
       MessageCli.INVALID_INPUT.printMessage();
-    } else {
-      MessageCli.PRINT_INFO_HAND.printMessage(options[0], numberFingers);
+      numberFingers = Utils.scanner.nextLine();
+      numberFingersInt = Integer.parseInt(numberFingers);
     }
 
+    MessageCli.PRINT_INFO_HAND.printMessage(options[0], numberFingers);
   }
 
   public void endGame() {}
