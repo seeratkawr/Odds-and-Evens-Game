@@ -84,12 +84,14 @@ public class Game {
     // calculate the total number of fingers
     totalFingers = numberFingersInt + aiFingers;
 
+    // check if the total number of fingers is even or odd
     if (Utils.isEven(totalFingers)) {
       if (choice.equals("EVEN")) {
         // print the outcome of the round where the player wins
         MessageCli.PRINT_OUTCOME_ROUND.printMessage(
             String.valueOf(totalFingers), "EVEN", options[0]);
       } else {
+        // print the outcome of the round where the AI wins
         MessageCli.PRINT_OUTCOME_ROUND.printMessage(
             String.valueOf(totalFingers), "EVEN", "HAL-9000");
       }
@@ -99,6 +101,7 @@ public class Game {
         MessageCli.PRINT_OUTCOME_ROUND.printMessage(
             String.valueOf(totalFingers), "ODD", options[0]);
       } else {
+        // print the outcome of the round where the AI wins
         MessageCli.PRINT_OUTCOME_ROUND.printMessage(
             String.valueOf(totalFingers), "ODD", "HAL-9000");
       }
