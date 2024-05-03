@@ -14,6 +14,15 @@ public class Game {
 
   public void play() {
     MessageCli.START_ROUND.printMessage(String.valueOf(round));
+    MessageCli.ASK_INPUT.printMessage();
+
+    String numberFingers = Utils.scanner.nextLine();
+    int numberFingersInt = Integer.parseInt(numberFingers);
+
+    if (numberFingersInt < 0 || numberFingersInt > 5) {
+      MessageCli.INVALID_INPUT.printMessage();
+    }
+
   }
 
   public void endGame() {}
