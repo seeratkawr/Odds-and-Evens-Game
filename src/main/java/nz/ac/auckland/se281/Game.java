@@ -5,9 +5,17 @@ import nz.ac.auckland.se281.Main.Difficulty;
 
 /** This class represents the Game is the main entry point. */
 public class Game {
-  private String[] options; // options array to hold the player name
+  private String[] options; // options array to hold the game options
   private int round = 1; // round number
 
+  /**
+   * This method is used to start a new game, with the specified difficulty, choice and options.
+   *
+   * @param difficulty The difficulty level of the game.
+   * @param choice The players choice.
+   * @param options The options array, the first element should be the name of the player.
+   * @throws NullPointerException if the options array is null.
+   */
   public void newGame(Difficulty difficulty, Choice choice, String[] options) {
     // set the options array
     this.options = options;
@@ -16,6 +24,14 @@ public class Game {
     MessageCli.WELCOME_PLAYER.printMessage(options[0]);
   }
 
+  /**
+   * This method initiates a new round of the game by prompting the player to input the number of
+   * fingers. Prints relevant messages to guide the player through the game.
+   *
+   * @throws NumberFormatException if the player inputs a value that cannot be parsed to an integer.
+   * @throws ArrayIndexOutOfBoundsException if the player inputs a value that is not within the
+   *     range of 0 to 5.
+   */
   public void play() {
     // print the start round message
     MessageCli.START_ROUND.printMessage(String.valueOf(round));
@@ -23,21 +39,34 @@ public class Game {
     // ask the player to input the number of fingers
     MessageCli.ASK_INPUT.printMessage();
 
-    // read the number of fingers from the player
-    String numberFingers = Utils.scanner.nextLine();
-    // convert the number of fingers to an integer
-    int numberFingersInt = Integer.parseInt(numberFingers);
+    Boolean isInputValid = false; // flag to check if the input is valid
+    String numberFingers; // the number of fingers inputted by the player
+    int numberFingersInt = 0; // the number of fingers inputted by the player as an integer
 
-    // check if the number of fingers is between 0 and 5
-    // if not, ask the player to input the number of fingers again
-    while (numberFingersInt < 0 || numberFingersInt > 5) {
-      MessageCli.INVALID_INPUT.printMessage();
+    // loop until the player inputs a valid number of fingers
+    while (!isInputValid) {
+      // get the number of fingers inputted by the player
       numberFingers = Utils.scanner.nextLine();
-      numberFingersInt = Integer.parseInt(numberFingers);
+
+      // check if the input is a number
+      try {
+        numberFingersInt = Integer.parseInt(numberFingers);
+
+        // check if the input is within the range of 0 to 5 (inclusive)
+        if (numberFingersInt >= 0 || numberFingersInt <= 5) {
+          isInputValid = true;
+        } else {
+          // print an error message if the input is not within the range of 0 to 5 (inclusive)
+          MessageCli.INVALID_INPUT.printMessage();
+        }
+        // print an error message if the input is not a number (NumberFormatException)
+      } catch (NumberFormatException e) {
+        MessageCli.INVALID_INPUT.printMessage();
+      }
     }
 
     // print the player's hand information
-    MessageCli.PRINT_INFO_HAND.printMessage(options[0], numberFingers);
+    MessageCli.PRINT_INFO_HAND.printMessage(options[0], String.valueOf(numberFingersInt));
   }
 
   public void endGame() {}
