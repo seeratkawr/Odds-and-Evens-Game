@@ -7,6 +7,7 @@ import nz.ac.auckland.se281.Main.Difficulty;
 public class Game {
   private String[] options; // options array to hold the game options
   private int round = 1; // round number
+  private String choice;
 
   /**
    * This method is used to start a new game, with the specified difficulty, choice and options.
@@ -19,6 +20,7 @@ public class Game {
   public void newGame(Difficulty difficulty, Choice choice, String[] options) {
     // set the options array
     this.options = options;
+    this.choice = choice.toString();
     // the first element of options[0]; is the name of the player
     // print the welcome message
     MessageCli.WELCOME_PLAYER.printMessage(options[0]);
@@ -42,6 +44,10 @@ public class Game {
     Boolean isInputValid = false; // flag to check if the input is valid
     String numberFingers; // the number of fingers inputted by the player
     int numberFingersInt = 0; // the number of fingers inputted by the player as an integer
+
+    AI ai = new AI();
+    int aiFingers;
+    int totalFingers;
 
     // loop until the player inputs a valid number of fingers
     while (!isInputValid) {
@@ -70,11 +76,33 @@ public class Game {
     MessageCli.PRINT_INFO_HAND.printMessage(options[0], String.valueOf(numberFingersInt));
 
     // generate a random number of fingers for the AI
-    AI ai = new AI();
-    int aiFingers = ai.playRandom();
+    aiFingers = ai.playRandom();
 
     // print the AI's hand information
     MessageCli.PRINT_INFO_HAND.printMessage("HAL-9000", String.valueOf(aiFingers));
+
+    // calculate the total number of fingers
+    totalFingers = numberFingersInt + aiFingers;
+
+    if (Utils.isEven(totalFingers)) {
+      if (choice.equals("EVEN")) {
+        // print the outcome of the round where the player wins
+        MessageCli.PRINT_OUTCOME_ROUND.printMessage(
+            String.valueOf(totalFingers), "EVEN", options[0]);
+      } else {
+        MessageCli.PRINT_OUTCOME_ROUND.printMessage(
+            String.valueOf(totalFingers), "EVEN", "HAL-9000");
+      }
+    } else if (Utils.isOdd(totalFingers)) {
+      if (choice.equals("ODD")) {
+        // print the outcome of the round where the player wins
+        MessageCli.PRINT_OUTCOME_ROUND.printMessage(
+            String.valueOf(totalFingers), "ODD", options[0]);
+      } else {
+        MessageCli.PRINT_OUTCOME_ROUND.printMessage(
+            String.valueOf(totalFingers), "ODD", "HAL-9000");
+      }
+    }
   }
 
   public void endGame() {}
