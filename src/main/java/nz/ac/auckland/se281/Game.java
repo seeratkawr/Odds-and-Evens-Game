@@ -68,6 +68,13 @@ public class Game {
 
     // print the player's hand information
     MessageCli.PRINT_INFO_HAND.printMessage(options[0], String.valueOf(numberFingersInt));
+
+    // generate a random number of fingers for the AI
+    AI ai = new AI();
+    int aiFingers = ai.playRandom();
+
+    // print the AI's hand information
+    MessageCli.PRINT_INFO_HAND.printMessage("HAL-9000", String.valueOf(aiFingers));
   }
 
   public void endGame() {}
