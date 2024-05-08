@@ -7,7 +7,6 @@ public class Human {
     String input = Utils.scanner.nextLine();
 
     while (!Utils.isInteger(input)) {
-      MessageCli.INVALID_INPUT.printMessage();
       input = Utils.scanner.nextLine();
     }
 

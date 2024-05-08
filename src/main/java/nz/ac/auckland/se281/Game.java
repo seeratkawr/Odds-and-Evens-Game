@@ -25,9 +25,14 @@ public class Game {
     round++;
     MessageCli.ASK_INPUT.printMessage();
 
-    while (!human.isInputValid(human.play())) {
+    String humanPlay = human.play();
+
+    while (!human.isInputValid(humanPlay)) {
       MessageCli.INVALID_INPUT.printMessage();
+      humanPlay = human.play();
     }
+
+    MessageCli.PRINT_INFO_HAND.printMessage(options[0], humanPlay);
   }
 
   public void endGame() {}
