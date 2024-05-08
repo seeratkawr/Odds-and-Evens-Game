@@ -7,38 +7,47 @@ public class MediumAI implements AI {
   private int oddCount = 0;
   private int evenCount = 0;
 
-  public MediumAI(int roundCount, String playerInput, String playerChoice) {
+  public MediumAI(
+      int roundCount, String playerInput, String playerChoice, int oddCount, int evenCount) {
     this.roundCount = roundCount;
     this.playerInput = playerInput;
     this.playerChoice = playerChoice;
+    this.oddCount = oddCount;
+    this.evenCount = evenCount;
+  }
 
+  @Override
+  public int getMove() {
     if (Utils.isOdd(Integer.parseInt(playerInput))) {
       oddCount++;
     } else {
       evenCount++;
     }
-  }
-
-  @Override
-  public int getMove() {
-    int aiChoice = 0;
 
     if (roundCount <= 3) {
-      aiChoice = Utils.getRandomNumberRange(0, 5);
+      return Utils.getRandomNumberRange(0, 5);
     }
 
-    if (oddCount > evenCount && playerChoice.equals("EVEN")) {
-      aiChoice = Utils.getRandomEvenNumber();
+    if (playerChoice.equals("ODD")) {
+      if (oddCount > evenCount) {
+        return Utils.getRandomOddNumber();
+      } else if (evenCount > oddCount) {
+        return Utils.getRandomEvenNumber();
+      } else {
+        return Utils.getRandomNumberRange(0, 5);
+      }
     }
 
-    if (evenCount > oddCount && playerChoice.equals("ODD")) {
-      aiChoice = Utils.getRandomOddNumber();
+    if (playerChoice.equals("EVEN")) {
+      if (oddCount > evenCount) {
+        return Utils.getRandomEvenNumber();
+      } else if (evenCount > oddCount) {
+        return Utils.getRandomOddNumber();
+      } else {
+        return Utils.getRandomNumberRange(0, 5);
+      }
     }
 
-    if (oddCount == evenCount) {
-      aiChoice = Utils.getRandomNumberRange(0, 5);
-    }
-
-    return aiChoice;
+    return Utils.getRandomNumberRange(0, 5);
   }
 }

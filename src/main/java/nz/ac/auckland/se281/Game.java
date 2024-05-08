@@ -8,6 +8,8 @@ public class Game {
   private int round = 1;
   private String choice;
   private String difficulty;
+  private int oddCount = 0;
+  private int evenCount = 0;
   private AI ai = new EasyAI();
 
   public void newGame(Difficulty difficulty, Choice choice, String[] options) {
@@ -16,6 +18,8 @@ public class Game {
     this.difficulty = difficulty.toString();
     MessageCli.WELCOME_PLAYER.printMessage(options[0]);
     round = 1;
+    oddCount = 0;
+    evenCount = 0;
   }
 
   public void play() {
@@ -26,6 +30,11 @@ public class Game {
     MessageCli.ASK_INPUT.printMessage();
 
     String humanPlay = human.play();
+    if (Utils.isOdd(Integer.parseInt(humanPlay))) {
+      oddCount++;
+    } else {
+      evenCount++;
+    }
 
     while (!human.isInputValid(humanPlay)) {
       MessageCli.INVALID_INPUT.printMessage();
@@ -35,7 +44,7 @@ public class Game {
     MessageCli.PRINT_INFO_HAND.printMessage(options[0], humanPlay);
 
     if (difficulty.equals("MEDIUM")) {
-      ai = new MediumAI(round, humanPlay, choice);
+      ai = new MediumAI(round, humanPlay, choice, oddCount, evenCount);
     }
 
     String aiPlay = String.valueOf(ai.getMove());
@@ -44,7 +53,7 @@ public class Game {
     int sum = Integer.parseInt(humanPlay) + Integer.parseInt(aiPlay);
 
     String result = sum % 2 == 0 ? "EVEN" : "ODD";
-    if (result == choice) {
+    if (result.equals(choice)) {
       MessageCli.PRINT_OUTCOME_ROUND.printMessage(Integer.toString(sum), result, options[0]);
     } else {
       MessageCli.PRINT_OUTCOME_ROUND.printMessage(Integer.toString(sum), result, "HAL-9000");
