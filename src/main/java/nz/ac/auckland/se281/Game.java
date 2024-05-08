@@ -20,6 +20,7 @@ public class Game {
 
   public void play() {
     Human human = new Human();
+    AI ai = new EasyAI();
 
     MessageCli.START_ROUND.printMessage(Integer.toString(round));
     round++;
@@ -33,6 +34,9 @@ public class Game {
     }
 
     MessageCli.PRINT_INFO_HAND.printMessage(options[0], humanPlay);
+
+    String aiPlay = String.valueOf(ai.getMove());
+    MessageCli.PRINT_INFO_HAND.printMessage("HAL-9000", aiPlay);
   }
 
   public void endGame() {}
