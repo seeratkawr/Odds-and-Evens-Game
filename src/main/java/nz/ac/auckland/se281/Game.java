@@ -15,6 +15,7 @@ public class Game {
     this.choice = choice.toString();
     this.difficulty = difficulty.toString();
     MessageCli.WELCOME_PLAYER.printMessage(options[0]);
+    round = 1;
   }
 
   public void play() {
@@ -32,6 +33,10 @@ public class Game {
     }
 
     MessageCli.PRINT_INFO_HAND.printMessage(options[0], humanPlay);
+
+    if (difficulty.equals("MEDIUM")) {
+      ai = new MediumAI(round, humanPlay, choice);
+    }
 
     String aiPlay = String.valueOf(ai.getMove());
     MessageCli.PRINT_INFO_HAND.printMessage("HAL-9000", aiPlay);
