@@ -4,10 +4,7 @@ public class HardAI implements AI {
   // Variables to store the round count, player input, player choice, odd count, even Count, and AI
   // method
   private final int roundCount;
-  private final String playerChoice;
   private final String prevWinner;
-  private final int oddCount;
-  private final int evenCount;
   private AIStrategy randomStrategy = new RandomStrategy();
   private AIStrategy topStrategy;
   private String lastStrategyName;
@@ -25,10 +22,7 @@ public class HardAI implements AI {
       int roundCount, String playerChoice, String prevWinner, int oddCount, int evenCount) {
     // Assign the values to the variables
     this.roundCount = roundCount;
-    this.playerChoice = playerChoice;
     this.prevWinner = prevWinner;
-    this.oddCount = oddCount;
-    this.evenCount = evenCount;
     this.topStrategy = new TopStrategy(playerChoice, oddCount, evenCount);
   }
 
@@ -64,6 +58,7 @@ public class HardAI implements AI {
       }
     }
 
+    // Store the last used AI method
     lastStrategyName = strategy.getStrategyName();
 
     // If prevWinner is not "AI" or "human", return a random number

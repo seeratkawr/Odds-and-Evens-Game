@@ -43,14 +43,17 @@ public class Game {
 
   /** Method to play a round of the game */
   public void play() {
+    // Create a new Human object
+    Human human = new Human();
+    String humanPlay;
+    String aiPlay;
+    int sum;
+
     // Check if the player has started the game
     if (difficulty == null && choice == null && options == null) {
       MessageCli.GAME_NOT_STARTED.printMessage();
       return;
     }
-
-    // Create a new Human object
-    Human human = new Human();
 
     // Print the start round message
     MessageCli.START_ROUND.printMessage(Integer.toString(round));
@@ -59,7 +62,7 @@ public class Game {
     MessageCli.ASK_INPUT.printMessage();
 
     // Get the user input
-    String humanPlay = human.play();
+    humanPlay = human.play();
 
     // Check if the user input is valid
     while (!human.isInputValid(humanPlay)) {
@@ -76,12 +79,12 @@ public class Game {
     createAI();
 
     // Get the AI move
-    String aiPlay = String.valueOf(ai.getMove());
+    aiPlay = String.valueOf(ai.getMove());
     // Print the AI move
     MessageCli.PRINT_INFO_HAND.printMessage("HAL-9000", aiPlay);
 
     // Calculate the sum of the user input and AI input
-    int sum = Integer.parseInt(humanPlay) + Integer.parseInt(aiPlay);
+    sum = Integer.parseInt(humanPlay) + Integer.parseInt(aiPlay);
 
     // Get the outcome of the round
     result = sum % 2 == 0 ? "EVEN" : "ODD";
@@ -113,10 +116,16 @@ public class Game {
     }
   }
 
+  /** Method to create a new AI object */
   private void createAI() {
     ai = AIFactory.getAI(difficulty, round, choice, winner, oddCount, evenCount);
   }
 
+  /**
+   * Method to update the game stats
+   *
+   * @param result Outcome of the round
+   */
   private void updateStats(String result) {
     if (result.equals(choice)) {
       humanWins++;
@@ -125,6 +134,7 @@ public class Game {
     }
   }
 
+  /** Method to end the game */
   public void endGame() {
 
     // Check if the player has started the game
@@ -133,8 +143,10 @@ public class Game {
       return;
     }
 
+    // Print the stats at the end of the game
     showStats();
 
+    // Print the end game message (winner or tie)
     if (humanWins > aiWins) {
       MessageCli.PRINT_END_GAME.printMessage(options[0]);
     } else if (aiWins > humanWins) {
@@ -149,6 +161,7 @@ public class Game {
     options = null;
   }
 
+  /** Method to show the game stats */
   public void showStats() {
     // Check if the player has started the game
     if (difficulty == null && choice == null && options == null) {

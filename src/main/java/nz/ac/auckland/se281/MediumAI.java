@@ -3,9 +3,6 @@ package nz.ac.auckland.se281;
 public class MediumAI implements AI {
   // Variables to store the round count, player input, player choice, odd count, and even count
   private final int roundCount;
-  private final String playerChoice;
-  private final int oddCount;
-  private final int evenCount;
   private AIStrategy randomStrategy = new RandomStrategy();
   private AIStrategy topStrategy;
 
@@ -20,9 +17,6 @@ public class MediumAI implements AI {
   public MediumAI(int roundCount, String playerChoice, int oddCount, int evenCount) {
     // Assign the values to the variables
     this.roundCount = roundCount;
-    this.playerChoice = playerChoice;
-    this.oddCount = oddCount;
-    this.evenCount = evenCount;
     this.topStrategy = new TopStrategy(playerChoice, oddCount, evenCount);
   }
 
