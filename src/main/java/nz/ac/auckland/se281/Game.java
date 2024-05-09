@@ -131,6 +131,14 @@ public class Game {
       MessageCli.GAME_NOT_STARTED.printMessage();
       return;
     }
+
+    showStats();
+
+    if (humanWins > aiWins) {
+      MessageCli.PRINT_END_GAME.printMessage(options[0]);
+    } else {
+      MessageCli.PRINT_END_GAME.printMessage("HAL-9000");
+    }
   }
 
   public void showStats() {
