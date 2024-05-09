@@ -10,7 +10,7 @@ public class HardAI implements AI {
   private String lastStrategyName;
 
   /**
-   * Constructor for the HardAI class
+   * Constructor for the HardAI class.
    *
    * @param roundCount round number
    * @param playerChoice Odd or Even
@@ -27,7 +27,7 @@ public class HardAI implements AI {
   }
 
   /**
-   * Method to get the move of the AI
+   * Method to get the move of the AI.
    *
    * @returns the move of the AI
    */

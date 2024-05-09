@@ -19,7 +19,7 @@ public class Game {
   private int aiWins = 0;
 
   /**
-   * Method to start a new game
+   * Method to start a new game.
    *
    * @param difficulty Difficulty of the game
    * @param choice Odd or Even
@@ -41,7 +41,7 @@ public class Game {
     winner = "";
   }
 
-  /** Method to play a round of the game */
+  /** Method to play a round of the game. */
   public void play() {
     // Create a new Human object
     Human human = new Human();
@@ -104,7 +104,7 @@ public class Game {
   }
 
   /**
-   * Method to update the odd and even count
+   * Method to update the odd and even count.
    *
    * @param humanPlay User input
    */
@@ -116,13 +116,13 @@ public class Game {
     }
   }
 
-  /** Method to create a new AI object */
+  /** Method to create a new AI object. */
   private void createAI() {
     ai = AIFactory.getAI(difficulty, round, choice, winner, oddCount, evenCount);
   }
 
   /**
-   * Method to update the game stats
+   * Method to update the game stats.
    *
    * @param result Outcome of the round
    */
@@ -134,7 +134,7 @@ public class Game {
     }
   }
 
-  /** Method to end the game */
+  /** Method to end the game. */
   public void endGame() {
 
     // Check if the player has started the game
@@ -161,7 +161,7 @@ public class Game {
     options = null;
   }
 
-  /** Method to show the game stats */
+  /** Method to show the game stats. */
   public void showStats() {
     // Check if the player has started the game
     if (difficulty == null && choice == null && options == null) {

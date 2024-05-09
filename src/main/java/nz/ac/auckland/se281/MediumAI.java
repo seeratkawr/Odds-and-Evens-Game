@@ -7,7 +7,7 @@ public class MediumAI implements AI {
   private AIStrategy topStrategy;
 
   /**
-   * Constructor for the MediumAI class
+   * Constructor for the MediumAI class.
    *
    * @param roundCount round number
    * @param playerChoice Odd or Even
@@ -21,13 +21,13 @@ public class MediumAI implements AI {
   }
 
   /**
-   * Method to get the move of the AI
+   * Method to get the move of the AI.
    *
    * @returns the move of the AI
    */
   @Override
   public int getMove() {
-    AIStrategy strategy = randomStrategy;
+    AIStrategy strategy;
 
     // If the round count is less than or equal to 3, return a random number between 0 and 5
     if (roundCount <= 3) {

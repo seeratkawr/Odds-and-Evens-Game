@@ -5,7 +5,7 @@ public class Human {
   protected boolean valid = false;
 
   /**
-   * Method to read the user input from the console
+   * Method to read the user input from the console.
    *
    * @returns the user input
    */
@@ -23,7 +23,7 @@ public class Human {
   }
 
   /**
-   * Method to check if the user input is valid
+   * Method to check if the user input is valid.
    *
    * @param input the user input
    * @returns true if the input is valid, false otherwise

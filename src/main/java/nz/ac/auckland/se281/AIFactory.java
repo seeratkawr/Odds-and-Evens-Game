@@ -2,7 +2,7 @@ package nz.ac.auckland.se281;
 
 public class AIFactory {
   /**
-   * Method to get the AI based on the difficulty
+   * Method to get the AI based on the difficulty.
    *
    * @param difficulty Difficulty of the AI
    * @param roundCount Round number

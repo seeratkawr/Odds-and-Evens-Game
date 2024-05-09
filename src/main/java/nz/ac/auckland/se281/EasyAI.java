@@ -4,7 +4,7 @@ public class EasyAI implements AI {
   private AIStrategy randomStrategy = new RandomStrategy();
 
   /**
-   * Method to get the move of the AI
+   * Method to get the move of the AI.
    *
    * @returns the move of the AI
    */

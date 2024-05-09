@@ -13,7 +13,7 @@ public class TopStrategy implements AIStrategy {
     this.evenCount = evenCount;
   }
 
-  /** Method to execute the top strategy */
+  /** Method to execute the top strategy. */
   @Override
   public int execute() {
     // Outputs a random number based on the player choice
@@ -42,7 +42,7 @@ public class TopStrategy implements AIStrategy {
     return Utils.getRandomNumberRange(0, 5);
   }
 
-  /** Method to get the strategy name */
+  /** Method to get the strategy name. */
   @Override
   public String getStrategyName() {
     return "top";
