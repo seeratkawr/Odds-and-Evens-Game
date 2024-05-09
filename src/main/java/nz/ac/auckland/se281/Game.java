@@ -14,6 +14,9 @@ public class Game {
   private int evenCount = 0;
   private AI ai;
   private String winner = "";
+  private String result;
+  private int humanWins = 0;
+  private int aiWins = 0;
 
   /**
    * Method to start a new game
@@ -40,6 +43,7 @@ public class Game {
 
   /** Method to play a round of the game */
   public void play() {
+    // Check if the player has started the game
     if (difficulty == null && choice == null && options == null) {
       MessageCli.GAME_NOT_STARTED.printMessage();
       return;
@@ -80,7 +84,7 @@ public class Game {
     int sum = Integer.parseInt(humanPlay) + Integer.parseInt(aiPlay);
 
     // Get the outcome of the round
-    String result = sum % 2 == 0 ? "EVEN" : "ODD";
+    result = sum % 2 == 0 ? "EVEN" : "ODD";
     // Print the outcome of the round
     if (result.equals(choice)) {
       MessageCli.PRINT_OUTCOME_ROUND.printMessage(Integer.toString(sum), result, options[0]);
@@ -91,6 +95,9 @@ public class Game {
       // Set the winner to AI
       winner = "AI";
     }
+
+    // Update the game stats
+    updateStats(result);
   }
 
   /**
@@ -110,7 +117,33 @@ public class Game {
     ai = AIFactory.getAI(difficulty, round, choice, winner, oddCount, evenCount);
   }
 
-  public void endGame() {}
+  private void updateStats(String result) {
+    if (result.equals(choice)) {
+      humanWins++;
+    } else {
+      aiWins++;
+    }
+  }
 
-  public void showStats() {}
+  public void endGame() {
+    // Check if the player has started the game
+    if (difficulty == null && choice == null && options == null) {
+      MessageCli.GAME_NOT_STARTED.printMessage();
+      return;
+    }
+  }
+
+  public void showStats() {
+    // Check if the player has started the game
+    if (difficulty == null && choice == null && options == null) {
+      MessageCli.GAME_NOT_STARTED.printMessage();
+      return;
+    }
+
+    // Print the game stats
+    MessageCli.PRINT_PLAYER_WINS.printMessage(
+        options[0], Integer.toString(humanWins), Integer.toString(aiWins));
+    MessageCli.PRINT_PLAYER_WINS.printMessage(
+        "HAL-9000", Integer.toString(aiWins), Integer.toString(humanWins));
+  }
 }
