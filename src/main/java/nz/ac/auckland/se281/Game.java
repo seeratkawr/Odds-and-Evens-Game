@@ -126,6 +126,7 @@ public class Game {
   }
 
   public void endGame() {
+
     // Check if the player has started the game
     if (difficulty == null && choice == null && options == null) {
       MessageCli.GAME_NOT_STARTED.printMessage();
@@ -136,8 +137,10 @@ public class Game {
 
     if (humanWins > aiWins) {
       MessageCli.PRINT_END_GAME.printMessage(options[0]);
-    } else {
+    } else if (aiWins > humanWins) {
       MessageCli.PRINT_END_GAME.printMessage("HAL-9000");
+    } else if (aiWins == humanWins) {
+      MessageCli.PRINT_END_GAME_TIE.printMessage();
     }
   }
 
