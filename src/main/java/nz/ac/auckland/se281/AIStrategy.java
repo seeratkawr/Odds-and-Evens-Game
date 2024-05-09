@@ -1,7 +1,7 @@
 package nz.ac.auckland.se281;
 
 /** Interface to define the AI strategy. */
-public interface AIStrategy {
+public interface AiStrategy {
   // Method to execute the strategy
   int execute();
 

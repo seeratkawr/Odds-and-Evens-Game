@@ -1,11 +1,11 @@
 package nz.ac.auckland.se281;
 
 /** Class to define the medium AI. */
-public class MediumAI implements AI {
+public class MediumAi implements Ai {
   // Variables to store the round count, player input, player choice, odd count, and even count
   private final int roundCount;
-  private AIStrategy randomStrategy = new RandomStrategy();
-  private AIStrategy topStrategy;
+  private AiStrategy randomStrategy = new RandomStrategy();
+  private AiStrategy topStrategy;
 
   /**
    * Constructor for the MediumAI class.
@@ -15,7 +15,7 @@ public class MediumAI implements AI {
    * @param oddCount Number of odd human inputs
    * @param evenCount Number of even human inputs
    */
-  public MediumAI(int roundCount, String playerChoice, int oddCount, int evenCount) {
+  public MediumAi(int roundCount, String playerChoice, int oddCount, int evenCount) {
     // Assign the values to the variables
     this.roundCount = roundCount;
     this.topStrategy = new TopStrategy(playerChoice, oddCount, evenCount);
@@ -28,7 +28,7 @@ public class MediumAI implements AI {
    */
   @Override
   public int getMove() {
-    AIStrategy strategy;
+    AiStrategy strategy;
 
     // If the round count is less than or equal to 3, return a random number between 0 and 5
     if (roundCount <= 3) {

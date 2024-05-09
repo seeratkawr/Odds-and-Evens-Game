@@ -1,7 +1,7 @@
 package nz.ac.auckland.se281;
 
 /** Class to define the top strategy for the AI. */
-public class TopStrategy implements AIStrategy {
+public class TopStrategy implements AiStrategy {
   // Variables to store the player choice, odd count, and even count
   private final String playerChoice;
   private final int oddCount;
