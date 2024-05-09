@@ -137,7 +137,6 @@ public class Game {
 
   /** Method to end the game. */
   public void endGame() {
-
     // Check if the player has started the game
     if (difficulty == null && choice == null && options == null) {
       MessageCli.GAME_NOT_STARTED.printMessage();
