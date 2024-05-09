@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HardAI implements AI {
-  // Variables to store the round count, player input, player choice, odd count, and even count
+  // Variables to store the round count, player input, player choice, odd count, even Count, and AI
+  // method
   private int roundCount;
   private String playerChoice;
   private String prevWinner;
@@ -13,10 +14,11 @@ public class HardAI implements AI {
   private List<String> aiMethod = new ArrayList<>();
 
   /**
-   * Constructor for the MediumAI class
+   * Constructor for the HardAI class
    *
    * @param roundCount round number
    * @param playerChoice Odd or Even
+   * @param prevWinner Previous winner (AI or human)
    * @param oddCount Number of odd human inputs
    * @param evenCount Number of even human inputs
    */
@@ -30,7 +32,16 @@ public class HardAI implements AI {
     this.evenCount = evenCount;
   }
 
-  private int top(int oddCount, int evenCount) {
+  /**
+   * Method to get the move of the AI using the Top method
+   *
+   * @returns the move of the AI
+   */
+  private int top() {
+    // Add the AI method to the list
+    aiMethod.add("top");
+
+    // Outputs for if the player choice is odd
     if (playerChoice.equals("ODD")) {
       if (oddCount > evenCount) {
         return Utils.getRandomOddNumber();
@@ -41,6 +52,7 @@ public class HardAI implements AI {
       }
     }
 
+    // Outputs for if the player choice is even
     if (playerChoice.equals("EVEN")) {
       if (oddCount > evenCount) {
         return Utils.getRandomEvenNumber();
@@ -51,6 +63,20 @@ public class HardAI implements AI {
       }
     }
 
+    // Return a random number between 0 and 5 if the player choice is not odd or even
+    return Utils.getRandomNumberRange(0, 5);
+  }
+
+  /**
+   * Method to get the move of the AI using the Random method
+   *
+   * @returns the move of the AI
+   */
+  private int random() {
+    // Add the AI method to the list
+    aiMethod.add("random");
+
+    // Return a random number between 0 and 5
     return Utils.getRandomNumberRange(0, 5);
   }
 
@@ -63,20 +89,28 @@ public class HardAI implements AI {
   public int getMove() {
     // If the round count is less than or equal to 3, return a random number between 0 and 5
     if (roundCount <= 3) {
-      aiMethod.add("random");
-      return Utils.getRandomNumberRange(0, 5);
+      return random();
     }
 
+    // If the previous winner is AI, return the last used AI method
     if (prevWinner.equals("AI")) {
-      if (aiMethod.get(aiMethod.size() - 1).equals("top")) {
-        aiMethod.add("top");
-        return top(oddCount, evenCount);
+      if (aiMethod.size() > 0 && aiMethod.get(aiMethod.size() - 1).equals("random")) {
+        return random();
       } else {
-        aiMethod.add("random");
-        return Utils.getRandomNumberRange(0, 5);
+        return top();
       }
     }
 
-    return Utils.getRandomNumberRange(0, 5);
+    // If the previous winner is human, change the AI method and return the move
+    if (prevWinner.equals("human")) {
+      if (aiMethod.size() > 0 && aiMethod.get(aiMethod.size() - 1).equals("random")) {
+        return top();
+      } else {
+        return random();
+      }
+    }
+
+    // If prevWinner is not "AI" or "human", return a random number
+    return random();
   }
 }
