@@ -52,24 +52,19 @@ public class Game {
     // Get the user input
     String humanPlay = human.play();
 
-    // Check if the user input is odd or even
-    if (Utils.isOdd(Integer.parseInt(humanPlay))) {
-      oddCount++;
-    } else {
-      evenCount++;
-    }
-
     // Check if the user input is valid
     while (!human.isInputValid(humanPlay)) {
       MessageCli.INVALID_INPUT.printMessage();
       humanPlay = human.play();
     }
 
+    // Update the odd and even count
+    updateCounters(humanPlay);
+
     // Print the user input
     MessageCli.PRINT_INFO_HAND.printMessage(options[0], humanPlay);
 
-    // Create a new AI object according to the difficulty
-    ai = AIFactory.getAI(difficulty, round, choice, winner, oddCount, evenCount);
+    createAI();
 
     // Get the AI move
     String aiPlay = String.valueOf(ai.getMove());
@@ -91,6 +86,23 @@ public class Game {
       // Set the winner to AI
       winner = "AI";
     }
+  }
+
+  /**
+   * Method to update the odd and even count
+   *
+   * @param humanPlay User input
+   */
+  private void updateCounters(String humanPlay) {
+    if (Utils.isOdd(Integer.parseInt(humanPlay))) {
+      oddCount++;
+    } else {
+      evenCount++;
+    }
+  }
+
+  private void createAI() {
+    ai = AIFactory.getAI(difficulty, round, choice, winner, oddCount, evenCount);
   }
 
   public void endGame() {}

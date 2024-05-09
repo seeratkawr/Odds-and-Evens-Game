@@ -2,10 +2,12 @@ package nz.ac.auckland.se281;
 
 public class MediumAI implements AI {
   // Variables to store the round count, player input, player choice, odd count, and even count
-  private int roundCount;
-  private String playerChoice;
-  private int oddCount = 0;
-  private int evenCount = 0;
+  private final int roundCount;
+  private final String playerChoice;
+  private final int oddCount;
+  private final int evenCount;
+  private AIStrategy randomStrategy = new RandomStrategy();
+  private AIStrategy topStrategy;
 
   /**
    * Constructor for the MediumAI class
@@ -21,6 +23,7 @@ public class MediumAI implements AI {
     this.playerChoice = playerChoice;
     this.oddCount = oddCount;
     this.evenCount = evenCount;
+    this.topStrategy = new TopStrategy(playerChoice, oddCount, evenCount);
   }
 
   /**
@@ -30,34 +33,16 @@ public class MediumAI implements AI {
    */
   @Override
   public int getMove() {
+    AIStrategy strategy = randomStrategy;
+
     // If the round count is less than or equal to 3, return a random number between 0 and 5
     if (roundCount <= 3) {
-      return Utils.getRandomNumberRange(0, 5);
-    }
-
-    // Outputs for if the player choice is odd
-    if (playerChoice.equals("ODD")) {
-      if (oddCount > evenCount) {
-        return Utils.getRandomOddNumber();
-      } else if (evenCount > oddCount) {
-        return Utils.getRandomEvenNumber();
-      } else {
-        return Utils.getRandomNumberRange(0, 5);
-      }
-    }
-
-    // Outputs for if the player choice is even
-    if (playerChoice.equals("EVEN")) {
-      if (oddCount > evenCount) {
-        return Utils.getRandomEvenNumber();
-      } else if (evenCount > oddCount) {
-        return Utils.getRandomOddNumber();
-      } else {
-        return Utils.getRandomNumberRange(0, 5);
-      }
+      strategy = randomStrategy;
+    } else {
+      strategy = topStrategy;
     }
 
     // Return a random number between 0 and 5
-    return Utils.getRandomNumberRange(0, 5);
+    return strategy.execute();
   }
 }

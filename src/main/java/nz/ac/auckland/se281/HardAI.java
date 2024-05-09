@@ -1,17 +1,16 @@
 package nz.ac.auckland.se281;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class HardAI implements AI {
   // Variables to store the round count, player input, player choice, odd count, even Count, and AI
   // method
-  private int roundCount;
-  private String playerChoice;
-  private String prevWinner;
-  private int oddCount = 0;
-  private int evenCount = 0;
-  private List<String> aiMethod = new ArrayList<>();
+  private final int roundCount;
+  private final String playerChoice;
+  private final String prevWinner;
+  private final int oddCount;
+  private final int evenCount;
+  private AIStrategy randomStrategy = new RandomStrategy();
+  private AIStrategy topStrategy;
+  private String lastStrategyName;
 
   /**
    * Constructor for the HardAI class
@@ -30,54 +29,7 @@ public class HardAI implements AI {
     this.prevWinner = prevWinner;
     this.oddCount = oddCount;
     this.evenCount = evenCount;
-  }
-
-  /**
-   * Method to get the move of the AI using the Top method
-   *
-   * @returns the move of the AI
-   */
-  private int top() {
-    // Add the AI method to the list
-    aiMethod.add("top");
-
-    // Outputs for if the player choice is odd
-    if (playerChoice.equals("ODD")) {
-      if (oddCount > evenCount) {
-        return Utils.getRandomOddNumber();
-      } else if (evenCount > oddCount) {
-        return Utils.getRandomEvenNumber();
-      } else {
-        return Utils.getRandomNumberRange(0, 5);
-      }
-    }
-
-    // Outputs for if the player choice is even
-    if (playerChoice.equals("EVEN")) {
-      if (oddCount > evenCount) {
-        return Utils.getRandomEvenNumber();
-      } else if (evenCount > oddCount) {
-        return Utils.getRandomOddNumber();
-      } else {
-        return Utils.getRandomNumberRange(0, 5);
-      }
-    }
-
-    // Return a random number between 0 and 5 if the player choice is not odd or even
-    return Utils.getRandomNumberRange(0, 5);
-  }
-
-  /**
-   * Method to get the move of the AI using the Random method
-   *
-   * @returns the move of the AI
-   */
-  private int random() {
-    // Add the AI method to the list
-    aiMethod.add("random");
-
-    // Return a random number between 0 and 5
-    return Utils.getRandomNumberRange(0, 5);
+    this.topStrategy = new TopStrategy(playerChoice, oddCount, evenCount);
   }
 
   /**
@@ -87,30 +39,34 @@ public class HardAI implements AI {
    */
   @Override
   public int getMove() {
+    AIStrategy strategy = randomStrategy;
+
     // If the round count is less than or equal to 3, return a random number between 0 and 5
     if (roundCount <= 3) {
-      return random();
+      strategy = randomStrategy;
     }
 
     // If the previous winner is AI, return the last used AI method
     if (prevWinner.equals("AI")) {
-      if (aiMethod.size() > 0 && aiMethod.get(aiMethod.size() - 1).equals("random")) {
-        return random();
+      if (lastStrategyName != null && lastStrategyName.equals("random")) {
+        strategy = randomStrategy;
       } else {
-        return top();
+        strategy = topStrategy;
       }
     }
 
     // If the previous winner is human, change the AI method and return the move
     if (prevWinner.equals("human")) {
-      if (aiMethod.size() > 0 && aiMethod.get(aiMethod.size() - 1).equals("random")) {
-        return top();
+      if (lastStrategyName != null && lastStrategyName.equals("random")) {
+        strategy = topStrategy;
       } else {
-        return random();
+        strategy = randomStrategy;
       }
     }
 
+    lastStrategyName = strategy.getStrategyName();
+
     // If prevWinner is not "AI" or "human", return a random number
-    return random();
+    return strategy.execute();
   }
 }
