@@ -1,5 +1,8 @@
 package nz.ac.auckland.se281;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import nz.ac.auckland.se281.Main.Choice;
 import nz.ac.auckland.se281.Main.Difficulty;
 
@@ -13,6 +16,7 @@ public class Game {
   private int oddCount = 0;
   private int evenCount = 0;
   private AI ai = new EasyAI();
+  private List<AI> aiList = new ArrayList<>();
 
   /**
    * Method to start a new game
@@ -40,6 +44,7 @@ public class Game {
   public void play() {
     // Create a new Human object
     Human human = new Human();
+    String winner = "";
 
     // Print the start round message
     MessageCli.START_ROUND.printMessage(Integer.toString(round));
@@ -69,7 +74,9 @@ public class Game {
     // Create a new AI object according to the difficulty
     if (difficulty.equals("MEDIUM")) {
       ai = new MediumAI(round, choice, oddCount, evenCount);
-    }s
+    } else if (difficulty.equals("HARD")) {
+      ai = new HardAI(round, choice, winner, oddCount, evenCount);
+    }
 
     // Get the AI move
     String aiPlay = String.valueOf(ai.getMove());
@@ -84,8 +91,10 @@ public class Game {
     // Print the outcome of the round
     if (result.equals(choice)) {
       MessageCli.PRINT_OUTCOME_ROUND.printMessage(Integer.toString(sum), result, options[0]);
+      winner = "human";
     } else {
       MessageCli.PRINT_OUTCOME_ROUND.printMessage(Integer.toString(sum), result, "HAL-9000");
+      winner = "AI";
     }
   }
 
