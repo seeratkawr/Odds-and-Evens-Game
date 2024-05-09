@@ -40,6 +40,11 @@ public class Game {
 
   /** Method to play a round of the game */
   public void play() {
+    if (difficulty == null && choice == null && options == null) {
+      MessageCli.GAME_NOT_STARTED.printMessage();
+      return;
+    }
+
     // Create a new Human object
     Human human = new Human();
 
