@@ -1,5 +1,6 @@
 package nz.ac.auckland.se281;
 
+/** Class to define the medium AI. */
 public class MediumAI implements AI {
   // Variables to store the round count, player input, player choice, odd count, and even count
   private final int roundCount;

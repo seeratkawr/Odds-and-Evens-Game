@@ -1,12 +1,19 @@
 package nz.ac.auckland.se281;
 
+/** Class to define the top strategy for the AI. */
 public class TopStrategy implements AIStrategy {
   // Variables to store the player choice, odd count, and even count
   private final String playerChoice;
   private final int oddCount;
   private final int evenCount;
 
-  // Constructor for the TopStrategy class
+  /**
+   * Constructor for the TopStrategy class.
+   *
+   * @param playerChoice Odd or Even
+   * @param oddCount Number of odd human inputs
+   * @param evenCount Number of even human inputs
+   */
   public TopStrategy(String playerChoice, int oddCount, int evenCount) {
     this.playerChoice = playerChoice;
     this.oddCount = oddCount;

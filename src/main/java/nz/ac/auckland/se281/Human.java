@@ -1,5 +1,6 @@
 package nz.ac.auckland.se281;
 
+/** Class to define the human player. */
 public class Human {
   // Variable to store the validity of the user input
   protected boolean valid = false;

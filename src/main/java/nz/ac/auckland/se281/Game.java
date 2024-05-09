@@ -3,6 +3,7 @@ package nz.ac.auckland.se281;
 import nz.ac.auckland.se281.Main.Choice;
 import nz.ac.auckland.se281.Main.Difficulty;
 
+/** Class to represent the game. */
 public class Game {
   // Variables to store the options, round number, player choice, difficulty, odd count, even count,
   // and AI

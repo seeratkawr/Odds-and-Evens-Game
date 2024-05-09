@@ -1,5 +1,6 @@
 package nz.ac.auckland.se281;
 
+/** Class to create the AI based on the difficulty. */
 public class AIFactory {
   /**
    * Method to get the AI based on the difficulty.
