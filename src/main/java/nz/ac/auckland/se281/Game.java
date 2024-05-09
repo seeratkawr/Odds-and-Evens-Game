@@ -142,6 +142,11 @@ public class Game {
     } else if (aiWins == humanWins) {
       MessageCli.PRINT_END_GAME_TIE.printMessage();
     }
+
+    // Reset the game
+    difficulty = null;
+    choice = null;
+    options = null;
   }
 
   public void showStats() {
