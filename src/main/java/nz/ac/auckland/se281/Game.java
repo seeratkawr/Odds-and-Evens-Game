@@ -12,7 +12,7 @@ public class Game {
   private String difficulty;
   private int oddCount = 0;
   private int evenCount = 0;
-  private AI ai = new EasyAI();
+  private AI ai;
   private String winner = "";
 
   /**
@@ -69,12 +69,7 @@ public class Game {
     MessageCli.PRINT_INFO_HAND.printMessage(options[0], humanPlay);
 
     // Create a new AI object according to the difficulty
-    if (difficulty.equals("MEDIUM")) {
-      ai = new MediumAI(round, choice, oddCount, evenCount);
-    } else if (difficulty.equals("HARD")) {
-      // Pass the winner to HardAI
-      ai = new HardAI(round, choice, winner, oddCount, evenCount);
-    }
+    ai = AIFactory.getAI(difficulty, round, choice, winner, oddCount, evenCount);
 
     // Get the AI move
     String aiPlay = String.valueOf(ai.getMove());
