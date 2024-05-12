@@ -119,7 +119,7 @@ public class Game {
 
   /** Method to create a new AI object. */
   private void createAI() {
-    ai = AIFactory.getAI(difficulty, round, choice, winner, oddCount, evenCount);
+    ai = Factory.getAI(difficulty, round, choice, winner, oddCount, evenCount);
   }
 
   /**
