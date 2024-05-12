@@ -77,7 +77,7 @@ public class Game {
     // Print the user input
     MessageCli.PRINT_INFO_HAND.printMessage(options[0], humanPlay);
 
-    createAI();
+    createAi();
 
     // Get the AI move
     aiPlay = String.valueOf(ai.play());
@@ -118,8 +118,8 @@ public class Game {
   }
 
   /** Method to create a new AI object. */
-  private void createAI() {
-    ai = Factory.getAI(difficulty, round, choice, winner, oddCount, evenCount);
+  private void createAi() {
+    ai = Factory.getAi(difficulty, round, choice, winner, oddCount, evenCount);
   }
 
   /**

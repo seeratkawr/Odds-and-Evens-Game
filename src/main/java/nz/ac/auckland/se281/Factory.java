@@ -13,7 +13,7 @@ public class Factory {
    * @param evenCount Number of even human inputs
    * @return the AI
    */
-  public static AiImplement getAI(
+  public static AiImplement getAi(
       String difficulty,
       int roundCount,
       String playerChoice,
