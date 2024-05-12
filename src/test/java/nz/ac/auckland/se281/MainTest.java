@@ -20,7 +20,8 @@ import org.junit.runners.Suite.SuiteClasses;
   MainTest.Task2.class,
   MainTest.Task3.class,
   MainTest.Task4.class,
-  MainTest.Task5.class
+  MainTest.Task5.class,
+  MainTest.YourTests.class
 })
 public class MainTest {
 
@@ -778,7 +779,6 @@ public class MainTest {
     }
   }
 
-  /*
   @FixMethodOrder(MethodSorters.NAME_ASCENDING)
   public static class YourTests extends CliTest {
 
@@ -787,6 +787,100 @@ public class MainTest {
     }
 
     @Test
-    public void yourtest1() throws Exception {}
-  } */
+    public void yourTest1() throws Exception {
+      Utils.random = new java.util.Random();
+      runCommands(
+          NEW_GAME + " MEDIUM ODD",
+          "Seerat",
+          //
+          PLAY,
+          "1",
+          //
+          PLAY,
+          "3",
+          //
+          PLAY,
+          "4",
+          //
+          PLAY,
+          "1",
+          //
+          PLAY,
+          "4");
+
+      assertContains(START_ROUND.getMessage("1"));
+      assertContains(ASK_INPUT.getMessage());
+      int res = MainTest.getPlay(3, "Seerat", getCaptureOut());
+      assertEquals(4, res);
+      res = MainTest.getPlay(4, "HAL-9000", getCaptureOut());
+      assertTrue(Utils.isOdd(res));
+      res = MainTest.getPlay(5, "HAL-9000", getCaptureOut());
+      assertTrue(Utils.isOdd(res));
+    }
+
+    @Test
+    public void yourTest2() throws Exception {
+      Utils.random = new java.util.Random(5);
+      runCommands(
+          NEW_GAME + " MEDIUM ODD",
+          "Seerat",
+          //
+          PLAY,
+          "1",
+          //
+          PLAY,
+          "3",
+          //
+          PLAY,
+          "4",
+          //
+          PLAY,
+          "1",
+          //
+          PLAY,
+          "4");
+
+      assertContains(START_ROUND.getMessage("1"));
+      assertContains(ASK_INPUT.getMessage());
+      int res = MainTest.getPlay(3, "Seerat", getCaptureOut());
+      assertEquals(4, res);
+      res = MainTest.getPlay(4, "HAL-9000", getCaptureOut());
+      assertTrue(Utils.isOdd(res));
+      res = MainTest.getPlay(5, "HAL-9000", getCaptureOut());
+      assertTrue(Utils.isOdd(res));
+    }
+
+    @Test
+    public void yourTest3() throws Exception {
+      Utils.random = new java.util.Random(3);
+      runCommands(
+          NEW_GAME + " HARD ODD",
+          "Seerat",
+          //
+          PLAY,
+          "2",
+          //
+          PLAY,
+          "5",
+          //
+          PLAY,
+          "4",
+          //
+          PLAY,
+          "5",
+          //
+          PLAY,
+          "1",
+          //
+          PLAY,
+          "0");
+
+      assertContains(START_ROUND.getMessage("1"));
+      assertContains(ASK_INPUT.getMessage());
+      int res = MainTest.getPlay(3, "Seerat", getCaptureOut());
+      assertEquals(4, res);
+      res = MainTest.getPlay(4, "HAL-9000", getCaptureOut());
+      assertTrue(Utils.isOdd(res));
+    }
+  }
 }
