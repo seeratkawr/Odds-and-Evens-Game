@@ -23,11 +23,11 @@ public class Factory {
     // Return the AI based on the difficulty
     switch (difficulty) {
       case "EASY":
-        return new EasyAI();
+        return new Easy();
       case "MEDIUM":
-        return new MediumAI(roundCount, playerChoice, oddCount, evenCount);
+        return new Medium(roundCount, playerChoice, oddCount, evenCount);
       case "HARD":
-        return new HardAI(roundCount, playerChoice, prevWinner, oddCount, evenCount);
+        return new Hard(roundCount, playerChoice, prevWinner, oddCount, evenCount);
       default:
         return null;
     }

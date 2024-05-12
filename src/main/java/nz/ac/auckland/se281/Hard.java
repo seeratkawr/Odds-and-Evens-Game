@@ -1,7 +1,7 @@
 package nz.ac.auckland.se281;
 
 /** Class to define the hard AI for the game. */
-public class HardAI implements AiImplement {
+public class Hard implements AiImplement {
   // Variables to store the round count, player input, player choice, odd count, even Count, and AI
   // method
   private final int roundCount;
@@ -19,7 +19,7 @@ public class HardAI implements AiImplement {
    * @param oddCount Number of odd human inputs
    * @param evenCount Number of even human inputs
    */
-  public HardAI(
+  public Hard(
       int roundCount, String playerChoice, String prevWinner, int oddCount, int evenCount) {
     // Assign the values to the variables
     this.roundCount = roundCount;

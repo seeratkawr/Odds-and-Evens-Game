@@ -1,7 +1,7 @@
 package nz.ac.auckland.se281;
 
 /** Class to define the medium AI. */
-public class MediumAI implements AiImplement {
+public class Medium implements AiImplement {
   // Variables to store the round count, player input, player choice, odd count, and even count
   private final int roundCount;
   private Strategy randomStrategy = new RandomStrategy();
@@ -15,7 +15,7 @@ public class MediumAI implements AiImplement {
    * @param oddCount Number of odd human inputs
    * @param evenCount Number of even human inputs
    */
-  public MediumAI(int roundCount, String playerChoice, int oddCount, int evenCount) {
+  public Medium(int roundCount, String playerChoice, int oddCount, int evenCount) {
     // Assign the values to the variables
     this.roundCount = roundCount;
     this.topStrategy = new TopStrategy(playerChoice, oddCount, evenCount);
