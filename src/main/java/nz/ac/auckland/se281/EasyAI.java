@@ -1,7 +1,7 @@
 package nz.ac.auckland.se281;
 
 /** Class to define the easy AI. */
-public class EasyAI implements AI {
+public class EasyAI implements AiImplement {
   private Strategy randomStrategy = new RandomStrategy();
 
   /**

@@ -1,7 +1,7 @@
 package nz.ac.auckland.se281;
 
 /** Class to define the hard AI for the game. */
-public class HardAI implements AI {
+public class HardAI implements AiImplement {
   // Variables to store the round count, player input, player choice, odd count, even Count, and AI
   // method
   private final int roundCount;

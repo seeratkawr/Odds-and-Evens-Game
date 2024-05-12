@@ -13,7 +13,7 @@ public class Game {
   private String difficulty;
   private int oddCount = 0;
   private int evenCount = 0;
-  private AI ai;
+  private AiImplement ai;
   private String winner = "";
   private String result;
   private int humanWins = 0;
