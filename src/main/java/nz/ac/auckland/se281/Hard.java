@@ -5,9 +5,11 @@ public class Hard implements AiImplement {
   // Variables to store the round count, player input, player choice, odd count, even Count, and AI
   // method
   private final int roundCount;
+  private final String playerChoice;
   private final String prevWinner;
-  private Strategy randomStrategy = new RandomStrategy();
-  private Strategy topStrategy;
+  private final int oddCount;
+  private final int evenCount;
+  private Strategy strategy;
   private String lastStrategyName;
 
   /**
@@ -22,8 +24,10 @@ public class Hard implements AiImplement {
   public Hard(int roundCount, String playerChoice, String prevWinner, int oddCount, int evenCount) {
     // Assign the values to the variables
     this.roundCount = roundCount;
+    this.playerChoice = playerChoice;
     this.prevWinner = prevWinner;
-    this.topStrategy = new TopStrategy(playerChoice, oddCount, evenCount);
+    this.oddCount = oddCount;
+    this.evenCount = evenCount;
   }
 
   /**
@@ -32,7 +36,7 @@ public class Hard implements AiImplement {
    * @param strategy the strategy to set
    */
   public void setStrategy(Strategy strategy) {
-    this.topStrategy = strategy;
+    this.strategy = strategy;
   }
 
   /**
@@ -42,28 +46,26 @@ public class Hard implements AiImplement {
    */
   @Override
   public int play() {
-    Strategy strategy = randomStrategy;
-
     // If the round count is less than or equal to 3, return a random number between 0 and 5
     if (roundCount <= 3) {
-      strategy = randomStrategy;
+      strategy = new RandomStrategy();
     }
 
     // If the previous winner is AI, return the last used AI method
     if (prevWinner.equals("AI")) {
       if (lastStrategyName != null && lastStrategyName.equals("random")) {
-        strategy = randomStrategy;
+        strategy = new RandomStrategy();
       } else {
-        strategy = topStrategy;
+        strategy = new TopStrategy(playerChoice, oddCount, evenCount);
       }
     }
 
     // If the previous winner is human, change the AI method and return the move
     if (prevWinner.equals("human")) {
       if (lastStrategyName != null && lastStrategyName.equals("random")) {
-        strategy = topStrategy;
+        strategy = new TopStrategy(playerChoice, oddCount, evenCount);
       } else {
-        strategy = randomStrategy;
+        strategy = new RandomStrategy();
       }
     }
 

@@ -4,8 +4,10 @@ package nz.ac.auckland.se281;
 public class Medium implements AiImplement {
   // Variables to store the round count, player input, player choice, odd count, and even count
   private final int roundCount;
-  private Strategy randomStrategy = new RandomStrategy();
-  private Strategy topStrategy;
+  private final String playerChoice;
+  private final int oddCount;
+  private final int evenCount;
+  private Strategy strategy;
 
   /**
    * Constructor for the MediumAI class.
@@ -18,7 +20,9 @@ public class Medium implements AiImplement {
   public Medium(int roundCount, String playerChoice, int oddCount, int evenCount) {
     // Assign the values to the variables
     this.roundCount = roundCount;
-    this.topStrategy = new TopStrategy(playerChoice, oddCount, evenCount);
+    this.playerChoice = playerChoice;
+    this.oddCount = oddCount;
+    this.evenCount = evenCount;
   }
 
   /**
@@ -27,7 +31,7 @@ public class Medium implements AiImplement {
    * @param strategy the strategy to set
    */
   public void setStrategy(Strategy strategy) {
-    this.topStrategy = strategy;
+    this.strategy = strategy;
   }
 
   /**
@@ -37,13 +41,11 @@ public class Medium implements AiImplement {
    */
   @Override
   public int play() {
-    Strategy strategy;
-
     // If the round count is less than or equal to 3, use the random strategy
     if (roundCount <= 3) {
-      strategy = randomStrategy;
+      strategy = new RandomStrategy();
     } else {
-      strategy = topStrategy;
+      strategy = new TopStrategy(playerChoice, oddCount, evenCount);
     }
 
     // Return the result of the strategy's execution
