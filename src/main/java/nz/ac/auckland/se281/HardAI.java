@@ -1,13 +1,13 @@
 package nz.ac.auckland.se281;
 
 /** Class to define the hard AI for the game. */
-public class HardAi implements Ai {
+public class HardAI implements AI {
   // Variables to store the round count, player input, player choice, odd count, even Count, and AI
   // method
   private final int roundCount;
   private final String prevWinner;
-  private AiStrategy randomStrategy = new RandomStrategy();
-  private AiStrategy topStrategy;
+  private Strategy randomStrategy = new RandomStrategy();
+  private Strategy topStrategy;
   private String lastStrategyName;
 
   /**
@@ -19,7 +19,7 @@ public class HardAi implements Ai {
    * @param oddCount Number of odd human inputs
    * @param evenCount Number of even human inputs
    */
-  public HardAi(
+  public HardAI(
       int roundCount, String playerChoice, String prevWinner, int oddCount, int evenCount) {
     // Assign the values to the variables
     this.roundCount = roundCount;
@@ -33,8 +33,8 @@ public class HardAi implements Ai {
    * @returns the move of the AI
    */
   @Override
-  public int getMove() {
-    AiStrategy strategy = randomStrategy;
+  public int play() {
+    Strategy strategy = randomStrategy;
 
     // If the round count is less than or equal to 3, return a random number between 0 and 5
     if (roundCount <= 3) {

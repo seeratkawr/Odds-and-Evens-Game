@@ -1,7 +1,7 @@
 package nz.ac.auckland.se281;
 
 /** Class to create the AI based on the difficulty. */
-public class AiFactory {
+public class Factory {
   /**
    * Method to get the AI based on the difficulty.
    *
@@ -13,7 +13,7 @@ public class AiFactory {
    * @param evenCount Number of even human inputs
    * @return the AI
    */
-  public static Ai getAI(
+  public static AI getAI(
       String difficulty,
       int roundCount,
       String playerChoice,
@@ -23,11 +23,11 @@ public class AiFactory {
     // Return the AI based on the difficulty
     switch (difficulty) {
       case "EASY":
-        return new EasyAi();
+        return new EasyAI();
       case "MEDIUM":
-        return new MediumAi(roundCount, playerChoice, oddCount, evenCount);
+        return new MediumAI(roundCount, playerChoice, oddCount, evenCount);
       case "HARD":
-        return new HardAi(roundCount, playerChoice, prevWinner, oddCount, evenCount);
+        return new HardAI(roundCount, playerChoice, prevWinner, oddCount, evenCount);
       default:
         return null;
     }

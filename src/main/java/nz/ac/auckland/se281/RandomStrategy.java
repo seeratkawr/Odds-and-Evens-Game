@@ -1,7 +1,7 @@
 package nz.ac.auckland.se281;
 
 /** Class to define the random strategy for the AI. */
-public class RandomStrategy implements AiStrategy {
+public class RandomStrategy implements Strategy {
 
   /** Method to execute the random strategy. */
   @Override

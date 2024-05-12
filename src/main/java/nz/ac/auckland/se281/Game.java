@@ -13,7 +13,7 @@ public class Game {
   private String difficulty;
   private int oddCount = 0;
   private int evenCount = 0;
-  private Ai ai;
+  private AI ai;
   private String winner = "";
   private String result;
   private int humanWins = 0;
@@ -80,7 +80,7 @@ public class Game {
     createAI();
 
     // Get the AI move
-    aiPlay = String.valueOf(ai.getMove());
+    aiPlay = String.valueOf(ai.play());
     // Print the AI move
     MessageCli.PRINT_INFO_HAND.printMessage("HAL-9000", aiPlay);
 
@@ -119,7 +119,7 @@ public class Game {
 
   /** Method to create a new AI object. */
   private void createAI() {
-    ai = AiFactory.getAI(difficulty, round, choice, winner, oddCount, evenCount);
+    ai = AIFactory.getAI(difficulty, round, choice, winner, oddCount, evenCount);
   }
 
   /**
