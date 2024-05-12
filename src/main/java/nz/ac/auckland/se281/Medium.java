@@ -22,6 +22,15 @@ public class Medium implements AiImplement {
   }
 
   /**
+   * Method to set the strategy of the AI.
+   *
+   * @param strategy the strategy to set
+   */
+  public void setStrategy(Strategy strategy) {
+    this.topStrategy = strategy;
+  }
+
+  /**
    * Method to get the move of the AI.
    *
    * @returns the move of the AI
@@ -30,14 +39,14 @@ public class Medium implements AiImplement {
   public int play() {
     Strategy strategy;
 
-    // If the round count is less than or equal to 3, return a random number between 0 and 5
+    // If the round count is less than or equal to 3, use the random strategy
     if (roundCount <= 3) {
       strategy = randomStrategy;
     } else {
       strategy = topStrategy;
     }
 
-    // Return a random number between 0 and 5
+    // Return the result of the strategy's execution
     return strategy.execute();
   }
 }

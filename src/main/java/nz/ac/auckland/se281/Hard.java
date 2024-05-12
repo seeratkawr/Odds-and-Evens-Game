@@ -19,12 +19,20 @@ public class Hard implements AiImplement {
    * @param oddCount Number of odd human inputs
    * @param evenCount Number of even human inputs
    */
-  public Hard(
-      int roundCount, String playerChoice, String prevWinner, int oddCount, int evenCount) {
+  public Hard(int roundCount, String playerChoice, String prevWinner, int oddCount, int evenCount) {
     // Assign the values to the variables
     this.roundCount = roundCount;
     this.prevWinner = prevWinner;
     this.topStrategy = new TopStrategy(playerChoice, oddCount, evenCount);
+  }
+
+  /**
+   * Method to set the strategy of the AI.
+   *
+   * @param strategy the strategy to set
+   */
+  public void setStrategy(Strategy strategy) {
+    this.topStrategy = strategy;
   }
 
   /**
