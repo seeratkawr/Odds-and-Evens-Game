@@ -43,9 +43,9 @@ public class Medium implements AiImplement {
   public int play() {
     // If the round count is less than or equal to 3, use the random strategy
     if (roundCount <= 3) {
-      strategy = new RandomStrategy();
+      setStrategy(new RandomStrategy());
     } else {
-      strategy = new TopStrategy(playerChoice, oddCount, evenCount);
+      setStrategy(new TopStrategy(playerChoice, oddCount, evenCount));
     }
 
     // Return the result of the strategy's execution

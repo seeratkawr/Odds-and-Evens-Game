@@ -48,20 +48,20 @@ public class Hard implements AiImplement {
   public int play() {
     // If the round count is less than or equal to 3, return a random number between 0 and 5
     if (roundCount <= 3) {
-      strategy = new RandomStrategy();
+      setStrategy(new RandomStrategy());
       // If the previous winner is AI, return the last used AI method
     } else if (prevWinner.equals("AI")) {
       if (lastStrategy instanceof RandomStrategy) {
-        strategy = new RandomStrategy();
+        setStrategy(new RandomStrategy());
       } else {
-        strategy = new TopStrategy(playerChoice, oddCount, evenCount);
+        setStrategy(new TopStrategy(playerChoice, oddCount, evenCount));
       }
       // If the previous winner is human, change the AI method and return the move
     } else if (prevWinner.equals("human")) {
       if (lastStrategy instanceof RandomStrategy) {
-        strategy = new TopStrategy(playerChoice, oddCount, evenCount);
+        setStrategy(new TopStrategy(playerChoice, oddCount, evenCount));
       } else {
-        strategy = new RandomStrategy();
+        setStrategy(new RandomStrategy());
       }
     }
 
