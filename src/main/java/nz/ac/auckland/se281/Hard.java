@@ -10,7 +10,7 @@ public class Hard implements AiImplement {
   private final int oddCount;
   private final int evenCount;
   private Strategy strategy;
-  private String lastStrategyName;
+  private Strategy lastStrategy;
 
   /**
    * Constructor for the HardAI class.
@@ -49,20 +49,16 @@ public class Hard implements AiImplement {
     // If the round count is less than or equal to 3, return a random number between 0 and 5
     if (roundCount <= 3) {
       strategy = new RandomStrategy();
-    }
-
-    // If the previous winner is AI, return the last used AI method
-    if (prevWinner.equals("AI")) {
-      if (lastStrategyName != null && lastStrategyName.equals("random")) {
+      // If the previous winner is AI, return the last used AI method
+    } else if (prevWinner.equals("AI")) {
+      if (lastStrategy instanceof RandomStrategy) {
         strategy = new RandomStrategy();
       } else {
         strategy = new TopStrategy(playerChoice, oddCount, evenCount);
       }
-    }
-
-    // If the previous winner is human, change the AI method and return the move
-    if (prevWinner.equals("human")) {
-      if (lastStrategyName != null && lastStrategyName.equals("random")) {
+      // If the previous winner is human, change the AI method and return the move
+    } else if (prevWinner.equals("human")) {
+      if (lastStrategy instanceof RandomStrategy) {
         strategy = new TopStrategy(playerChoice, oddCount, evenCount);
       } else {
         strategy = new RandomStrategy();
@@ -70,7 +66,7 @@ public class Hard implements AiImplement {
     }
 
     // Store the last used AI method
-    lastStrategyName = strategy.getStrategyName();
+    lastStrategy = strategy;
 
     // If prevWinner is not "AI" or "human", return a random number
     return strategy.execute();

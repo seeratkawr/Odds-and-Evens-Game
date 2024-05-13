@@ -71,17 +71,14 @@ public class Game {
       humanPlay = human.play();
     }
 
-    // Update the odd and even count
-    updateCounters(humanPlay);
-
-    // Print the user input
     MessageCli.PRINT_INFO_HAND.printMessage(options[0], humanPlay);
+
+    updateCounters(humanPlay);
 
     createAi();
 
-    // Get the AI move
+    // Get the AI move and print it
     aiPlay = String.valueOf(ai.play());
-    // Print the AI move
     MessageCli.PRINT_INFO_HAND.printMessage("HAL-9000", aiPlay);
 
     // Calculate the sum of the user input and AI input

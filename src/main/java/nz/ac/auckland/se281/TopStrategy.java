@@ -29,8 +29,6 @@ public class TopStrategy implements Strategy {
         return Utils.getRandomOddNumber();
       } else if (evenCount > oddCount) {
         return Utils.getRandomEvenNumber();
-      } else {
-        return Utils.getRandomNumberRange(0, 5);
       }
     }
 
@@ -40,8 +38,6 @@ public class TopStrategy implements Strategy {
         return Utils.getRandomEvenNumber();
       } else if (evenCount > oddCount) {
         return Utils.getRandomOddNumber();
-      } else {
-        return Utils.getRandomNumberRange(0, 5);
       }
     }
 
