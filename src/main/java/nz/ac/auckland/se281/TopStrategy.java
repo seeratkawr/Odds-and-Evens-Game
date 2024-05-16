@@ -44,10 +44,4 @@ public class TopStrategy implements Strategy {
     // Outputs a random number between 0 and 5
     return Utils.getRandomNumberRange(0, 5);
   }
-
-  /** Method to get the strategy name. */
-  @Override
-  public String getStrategyName() {
-    return "top";
-  }
 }

@@ -6,11 +6,11 @@ public class Hard implements AiImplement {
   // method
   private final int roundCount;
   private final String playerChoice;
-  private final String prevWinner;
+  private final boolean aiWins;
   private final int oddCount;
   private final int evenCount;
   private Strategy strategy;
-  private Strategy lastStrategy;
+  private Strategy lastStrategy = new RandomStrategy();
 
   /**
    * Constructor for the HardAI class.
@@ -21,11 +21,11 @@ public class Hard implements AiImplement {
    * @param oddCount Number of odd human inputs
    * @param evenCount Number of even human inputs
    */
-  public Hard(int roundCount, String playerChoice, String prevWinner, int oddCount, int evenCount) {
+  public Hard(int roundCount, String playerChoice, boolean aiWins, int oddCount, int evenCount) {
     // Assign the values to the variables
     this.roundCount = roundCount;
     this.playerChoice = playerChoice;
-    this.prevWinner = prevWinner;
+    this.aiWins = aiWins;
     this.oddCount = oddCount;
     this.evenCount = evenCount;
   }
@@ -50,14 +50,10 @@ public class Hard implements AiImplement {
     if (roundCount <= 3) {
       setStrategy(new RandomStrategy());
       // If the previous winner is AI, return the last used AI method
-    } else if (prevWinner.equals("AI")) {
-      if (lastStrategy instanceof RandomStrategy) {
-        setStrategy(new RandomStrategy());
-      } else {
-        setStrategy(new TopStrategy(playerChoice, oddCount, evenCount));
-      }
+    } else if (aiWins) {
+      setStrategy(lastStrategy);
       // If the previous winner is human, change the AI method and return the move
-    } else if (prevWinner.equals("human")) {
+    } else if (!aiWins) {
       if (lastStrategy instanceof RandomStrategy) {
         setStrategy(new TopStrategy(playerChoice, oddCount, evenCount));
       } else {
@@ -65,9 +61,7 @@ public class Hard implements AiImplement {
       }
     }
 
-    // Store the last used AI method
     lastStrategy = strategy;
-
     // If prevWinner is not "AI" or "human", return a random number
     return strategy.execute();
   }

@@ -14,7 +14,7 @@ public class Game {
   private int oddCount = 0;
   private int evenCount = 0;
   private AiImplement ai;
-  private String winner = "";
+  private boolean winner;
   private String result;
   private int humanWins = 0;
   private int aiWins = 0;
@@ -39,7 +39,6 @@ public class Game {
     round = 1;
     oddCount = 0;
     evenCount = 0;
-    winner = "";
   }
 
   /** Method to play a round of the game. */
@@ -90,11 +89,11 @@ public class Game {
     if (result.equals(choice)) {
       MessageCli.PRINT_OUTCOME_ROUND.printMessage(Integer.toString(sum), result, options[0]);
       // Set the winner to human
-      winner = "human";
+      winner = false;
     } else {
       MessageCli.PRINT_OUTCOME_ROUND.printMessage(Integer.toString(sum), result, "HAL-9000");
       // Set the winner to AI
-      winner = "AI";
+      winner = true;
     }
 
     // Update the game stats

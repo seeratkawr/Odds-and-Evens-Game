@@ -17,7 +17,7 @@ public class Factory {
       String difficulty,
       int roundCount,
       String playerChoice,
-      String prevWinner,
+      boolean aiWins,
       int oddCount,
       int evenCount) {
     // Return the AI based on the difficulty
@@ -27,7 +27,7 @@ public class Factory {
       case "MEDIUM":
         return new Medium(roundCount, playerChoice, oddCount, evenCount);
       case "HARD":
-        return new Hard(roundCount, playerChoice, prevWinner, oddCount, evenCount);
+        return new Hard(roundCount, playerChoice, aiWins, oddCount, evenCount);
       default:
         return null;
     }
