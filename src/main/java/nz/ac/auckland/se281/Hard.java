@@ -17,7 +17,7 @@ public class Hard implements Ai {
    *
    * @param roundCount round number
    * @param playerChoice Odd or Even
-   * @param prevWinner Previous winner (AI or human)
+   * @param aiWins true if AI wins, false if human wins
    * @param oddCount Number of odd human inputs
    * @param evenCount Number of even human inputs
    */

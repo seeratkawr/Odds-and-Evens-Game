@@ -8,7 +8,7 @@ public class Factory {
    * @param difficulty Difficulty of the AI
    * @param roundCount Round number
    * @param playerChoice Odd or Even
-   * @param prevWinner Previous winner (AI or human)
+   * @param aiWins true if the AI wins, false otherwise
    * @param oddCount Number of odd human inputs
    * @param evenCount Number of even human inputs
    * @return the AI
