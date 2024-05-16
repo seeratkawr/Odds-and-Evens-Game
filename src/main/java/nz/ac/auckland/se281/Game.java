@@ -7,13 +7,14 @@ import nz.ac.auckland.se281.Main.Difficulty;
 public class Game {
   // Variables to store the options, round number, player choice, difficulty, odd count, even count,
   // and AI
-  private String[] options;
+  private String playerName;
+  private String aiName = "HAL-9000";
   private int round = 1;
   private String choice;
   private String difficulty;
   private int oddCount = 0;
   private int evenCount = 0;
-  private AiImplement ai;
+  private Ai ai;
   private boolean winner;
   private String result;
   private int humanWins = 0;
@@ -24,11 +25,11 @@ public class Game {
    *
    * @param difficulty Difficulty of the game
    * @param choice Odd or Even
-   * @param options Player name
+   * @param options options[0] is the playerName
    */
   public void newGame(Difficulty difficulty, Choice choice, String[] options) {
     // Assign the values to the variables
-    this.options = options;
+    this.playerName = options[0];
     this.choice = choice.toString();
     this.difficulty = difficulty.toString();
 
@@ -50,7 +51,7 @@ public class Game {
     int sum;
 
     // Check if the player has started the game
-    if (difficulty == null && choice == null && options == null) {
+    if (difficulty == null && choice == null && playerName == null) {
       MessageCli.GAME_NOT_STARTED.printMessage();
       return;
     }
@@ -70,7 +71,7 @@ public class Game {
       humanPlay = human.play();
     }
 
-    MessageCli.PRINT_INFO_HAND.printMessage(options[0], humanPlay);
+    MessageCli.PRINT_INFO_HAND.printMessage(playerName, humanPlay);
 
     updateCounters(humanPlay);
 
@@ -78,7 +79,7 @@ public class Game {
 
     // Get the AI move and print it
     aiPlay = String.valueOf(ai.play());
-    MessageCli.PRINT_INFO_HAND.printMessage("HAL-9000", aiPlay);
+    MessageCli.PRINT_INFO_HAND.printMessage(aiName, aiPlay);
 
     // Calculate the sum of the user input and AI input
     sum = Integer.parseInt(humanPlay) + Integer.parseInt(aiPlay);
@@ -87,11 +88,11 @@ public class Game {
     result = sum % 2 == 0 ? "EVEN" : "ODD";
     // Print the outcome of the round
     if (result.equals(choice)) {
-      MessageCli.PRINT_OUTCOME_ROUND.printMessage(Integer.toString(sum), result, options[0]);
+      MessageCli.PRINT_OUTCOME_ROUND.printMessage(Integer.toString(sum), result, playerName);
       // Set the winner to human
       winner = false;
     } else {
-      MessageCli.PRINT_OUTCOME_ROUND.printMessage(Integer.toString(sum), result, "HAL-9000");
+      MessageCli.PRINT_OUTCOME_ROUND.printMessage(Integer.toString(sum), result, aiName);
       // Set the winner to AI
       winner = true;
     }
@@ -134,7 +135,7 @@ public class Game {
   /** Method to end the game. */
   public void endGame() {
     // Check if the player has started the game
-    if (difficulty == null && choice == null && options == null) {
+    if (difficulty == null && choice == null && playerName == null) {
       MessageCli.GAME_NOT_STARTED.printMessage();
       return;
     }
@@ -144,9 +145,9 @@ public class Game {
 
     // Print the end game message (winner or tie)
     if (humanWins > aiWins) {
-      MessageCli.PRINT_END_GAME.printMessage(options[0]);
+      MessageCli.PRINT_END_GAME.printMessage(playerName);
     } else if (aiWins > humanWins) {
-      MessageCli.PRINT_END_GAME.printMessage("HAL-9000");
+      MessageCli.PRINT_END_GAME.printMessage(aiName);
     } else if (aiWins == humanWins) {
       MessageCli.PRINT_END_GAME_TIE.printMessage();
     }
@@ -154,21 +155,21 @@ public class Game {
     // Reset the game
     difficulty = null;
     choice = null;
-    options = null;
+    playerName = null;
   }
 
   /** Method to show the game stats. */
   public void showStats() {
     // Check if the player has started the game
-    if (difficulty == null && choice == null && options == null) {
+    if (difficulty == null && choice == null && playerName == null) {
       MessageCli.GAME_NOT_STARTED.printMessage();
       return;
     }
 
     // Print the game stats
     MessageCli.PRINT_PLAYER_WINS.printMessage(
-        options[0], Integer.toString(humanWins), Integer.toString(aiWins));
+        playerName, Integer.toString(humanWins), Integer.toString(aiWins));
     MessageCli.PRINT_PLAYER_WINS.printMessage(
-        "HAL-9000", Integer.toString(aiWins), Integer.toString(humanWins));
+        aiName, Integer.toString(aiWins), Integer.toString(humanWins));
   }
 }

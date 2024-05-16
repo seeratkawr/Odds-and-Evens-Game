@@ -1,7 +1,7 @@
 package nz.ac.auckland.se281;
 
 /** Class to define the easy AI. */
-public class Easy implements AiImplement {
+public class Easy implements Ai {
   // Variable to store the strategy of the AI
   private Strategy strategy;
 
