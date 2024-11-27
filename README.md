@@ -1,4 +1,4 @@
-# Assignment 2
+# Odds and Evens Game
 
 Odds and evens game is a very simple game.
 
@@ -19,7 +19,4 @@ Even + Even = Even: When you add two even numbers together, the result is always
 Odd + Even = Odd: When you add an odd number and an even number together, the result is always odd. For example: 1 (odd) + 2 (even) = 3 (odd)
 
 Even + Odd = Odd: This is the same as above, just in reverse order. When you add an even number and an odd number together, the result is always odd. For example: 2 (even) + 3 (odd)= 5 (odd)
-
-In this assignment you need to implement this game in Java. A human player plays against an artificial intelligence (AI), called HAL-9000 (I hope you get the reference :)). This is a game of chance, but also a game of psychology! The AI will try to learn the behaviour of the human player and attempt to guess the player’s next move.
-
 
